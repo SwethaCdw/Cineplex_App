@@ -1,0 +1,33 @@
+.trailers {
+    padding: 70px 100px;
+    .title {
+        font-size: 35px;
+    }
+    .caption {
+        font-size: 20px;
+    }
+    .trailer-section {
+        display: flex;
+        margin-top: 20px;
+        .trailer-image {
+            width: 365px;
+            height: 280px;
+            object-fit: cover;
+        }
+        .title {
+            margin-bottom: 20px;
+        }
+        .description {
+            margin: 20px 35px;
+            .description-caption {
+                font-size: 24px;
+                margin-bottom: 45px;
+                margin-right: 115px;
+            }
+            .watch-button {
+                padding: 12px 25px;
+                background-color: #d9bc2d;
+            }
+        }
+    }
+}

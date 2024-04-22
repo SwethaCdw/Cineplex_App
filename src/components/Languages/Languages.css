@@ -1,0 +1,21 @@
+.other-languages {
+  padding: 70px 100px;
+}
+.other-languages .language-list {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 5px;
+  margin-top: 15px;
+}
+.other-languages .language-list .language {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4889d6;
+  font-size: 30px;
+  width: 50px;
+  border: 1px solid #4889d6;
+  height: 50px;
+  text-decoration: none;
+}/*# sourceMappingURL=Languages.css.map */

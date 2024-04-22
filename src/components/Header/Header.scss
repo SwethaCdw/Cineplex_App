@@ -1,0 +1,44 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.header {
+    @include flex-align(space-between, center);
+    background-color: $tab-color;
+    height: 65px;
+    padding: 0 35px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    img {
+        width: 115px;
+    }
+    .app-logo {
+        cursor: pointer;
+        font-weight: 600;
+    }
+    ul {
+        list-style: none;
+        @include flex-align(space-between, normal);
+        width: 13%;
+        height: 100%;
+        color: white;
+        li{
+            font-size: 1rem;
+            font-weight: 600;
+            padding-top: 22px;
+        }
+        .active{
+            border-bottom: 8px solid $tab-color;
+        }
+    }
+    .profile-user {
+        @include flex-align(normal, center);
+        gap: 10px;
+        font-weight: bold;
+        font-size: 1rem;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: white;
+    }
+}
