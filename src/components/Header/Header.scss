@@ -30,6 +30,9 @@
         .active{
             border-bottom: 8px solid $tab-color;
         }
+        a {
+            @include flex-align(normal, center);
+        }
     }
     .profile-user {
         @include flex-align(normal, center);

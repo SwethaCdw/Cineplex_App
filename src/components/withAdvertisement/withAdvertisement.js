@@ -1,26 +1,54 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect } from 'react';
 
 const withAdvertisement = (WrappedComponent) => {
-    return () => {
-        const [showAd, setShowAd] = useState(false);
+  return () => {
+    const [moviePageCounter, setMoviePageCounter] = useState(null);
+    const [showImage, setShowImage] = useState(false);
+    const [imageCounter, setImageCounter] = useState(null);
 
-        useEffect(() => {
-            console.log('With Advertisment',showAd);
-            let adTimeout;
-            if (showAd) {
-                adTimeout = setTimeout(() => {
-                    setShowAd(false);
-                }, 2000); // Show advertisement for 2 seconds
-            }
-            return () => clearTimeout(adTimeout);
-        }, [showAd]);
+    useEffect(() => {
+      setImageCounter(2);
+      const countdown = setInterval(() => {
+        if (moviePageCounter > 0) {
+          setMoviePageCounter(moviePageCounter - 1);
+        }
+      }, 1000);
 
-        return (
-            <WrappedComponent
-                showAd={showAd}
-            />
-        );
-    };
+      if (moviePageCounter === 0) {
+            setShowImage(true);
+            clearTimeout(countdown);
+        }
+
+      return () => clearInterval(countdown);
+    }, [moviePageCounter]);
+
+    useEffect(() => {
+      if (showImage) {
+        const imageCountdown = setTimeout(() => {
+          if (imageCounter > 0) {
+            setImageCounter(imageCounter - 1);
+          }
+        }, 1000);
+
+        if (imageCounter === 0) {
+          setShowImage(false);
+          clearTimeout(imageCountdown);
+        }
+
+        return () => clearTimeout(imageCountdown);
+      }
+    }, [showImage, imageCounter]);
+
+    return (
+      <WrappedComponent
+        moviePageCounter={moviePageCounter}
+        setMoviePageCounter={setMoviePageCounter}
+        showImage={showImage}
+        imageCounter={imageCounter}
+      />
+    );
+  };
 };
 
 export default withAdvertisement;

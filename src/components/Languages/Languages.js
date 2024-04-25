@@ -18,10 +18,3 @@ const Languages = () => {
 }
 
 export default Languages;
-
-
-// മ
-// ह
-// த
-// ಜ
-// E

@@ -31,6 +31,11 @@
 .header ul .active {
   border-bottom: 8px solid #000;
 }
+.header ul a {
+  display: flex;
+  align-items: center;
+  justify-content: normal;
+}
 .header .profile-user {
   display: flex;
   align-items: center;

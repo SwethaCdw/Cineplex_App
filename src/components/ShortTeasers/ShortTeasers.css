@@ -10,24 +10,41 @@
   position: relative;
   gap: 30px;
 }
-.short-teasers-section .videos-container .video-player {
+.short-teasers-section .videos-container .video-wrapper {
+  position: relative;
+}
+.short-teasers-section .videos-container .video-wrapper .video-player {
   width: 100%;
   margin-bottom: 25px;
 }
-.short-teasers-section .videos-container .teaser-title {
+.short-teasers-section .videos-container .video-wrapper .teaser-title {
   font-size: 24px;
 }
-.short-teasers-section .videos-container .play-button {
+.short-teasers-section .videos-container .video-wrapper .play-icon {
+  height: 2em;
   position: absolute;
   top: 50%;
   transform: translate(240%, -85%);
   background-color: transparent;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 20px 30px;
   cursor: pointer;
   z-index: 1;
 }
-.short-teasers-section .videos-container .play-button svg {
+.short-teasers-section .videos-container .video-wrapper .play-icon svg {
   height: 3rem;
+}
+.short-teasers-section .videos-container .video-wrapper .notification p {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #488cd7;
+}
+.short-teasers-section .videos-container .video-wrapper .notification .advertisement {
+  width: 500px;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  top: 0%;
 }/*# sourceMappingURL=ShortTeasers.css.map */

@@ -8,26 +8,45 @@
         display: flex;
         position: relative;
         gap: 30px;
-        .video-player {
-            width: 100%;
-            margin-bottom: 25px;
-        }
-        .teaser-title {
-            font-size: 24px;
-        }
-        .play-button {
-            position: absolute;
-            top: 50%;
-            transform: translate(240%, -85%);
-            background-color: transparent;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            z-index: 1;
-            svg {
-                height: 3rem;
+        .video-wrapper {
+            position: relative;
+            .video-player {
+                width: 100%;
+                margin-bottom: 25px;
+            }
+            .teaser-title {
+                font-size: 24px;
+            }
+            .play-icon {
+                height: 2em;
+                position: absolute;
+                top: 50%;
+                transform: translate(240%, -85%);
+                background-color: transparent;
+                color: white;
+                border: none;
+                padding: 20px 30px;
+                cursor: pointer;
+                z-index: 1;
+                svg {
+                    height: 3rem;
+                }
+            }
+            .notification {
+                p {
+                    margin-top: 5px;
+                    font-size: 16px;
+                    color: #488cd7;
+                }
+                .advertisement {
+                    width: 500px;
+                    height: 300px;
+                    object-fit: cover;
+                    position: absolute;
+                    top: 0%;
+                }
             }
         }
+       
     }
 }

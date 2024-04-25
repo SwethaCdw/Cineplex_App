@@ -3,7 +3,6 @@ import React from 'react';
 // Error boundary component
 class ErrorBoundary extends React.Component {
   constructor(props) {
-    console.log(props)
     super(props);
     this.state = { hasError: false, error: null, errorInfo: null };
   }

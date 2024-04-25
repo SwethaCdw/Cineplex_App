@@ -4,16 +4,11 @@ const withVideoControls = (WrappedComponent) => {
 
     return () => {
         const [showAd, setShowAd] = useState([]);
-
-        console.log('With video conteols');
-
         const videoRefs = useRef([]);
         const [showControls, setShowControls] = useState([]);
 
         const handlePlay = (index) => {
-            console.log(videoRefs);
             const video = videoRefs.current[index];
-            console.log('video', video, index);
             if (video.paused) {
                 video.play();
                 setShowControls((prev) => ({ ...prev, [index]: true }));

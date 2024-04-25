@@ -14,7 +14,7 @@ const Header = () => {
         <ul>
         {MENU_ITEMS.map((item) => {
                 return (
-                    <li key={item}>{item.toUpperCase()}</li>
+                  <Link to={item === 'ALL MOVIES' ? '/all-movies' : '/'}>{item.toUpperCase()}</Link>
                 );
             })} 
         </ul>
