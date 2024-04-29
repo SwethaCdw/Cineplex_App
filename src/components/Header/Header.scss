@@ -16,29 +16,32 @@
         cursor: pointer;
         font-weight: 600;
     }
-    ul {
-        list-style: none;
-        @include flex-align(space-between, normal);
-        width: 13%;
-        height: 100%;
-        color: white;
-        li{
-            font-size: 1rem;
-            font-weight: 600;
-            padding-top: 22px;
-        }
-        .active{
-            border-bottom: 8px solid $tab-color;
-        }
-        a {
-            @include flex-align(normal, center);
+    .header-options {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 60%;
+        .menu-items {
+            list-style: none;
+            @include flex-align(space-between, normal);
+            width: 40%;
+            height: 100%;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            a {
+                @include flex-align(normal, center);
+            }
+            .now-showing {
+                color: #488cd7;
+            }
         }
     }
     .profile-user {
         @include flex-align(normal, center);
         gap: 10px;
-        font-weight: bold;
-        font-size: 1rem;
+        font-weight: 500;
+        font-size: 1.25rem;
         max-width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;

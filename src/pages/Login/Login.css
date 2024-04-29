@@ -1,0 +1,103 @@
+.login-container {
+  height: 100vh;
+  background-image: url("../../assets//sindel-background.png"); /* Example: URL to your background image */
+  background-size: cover; /* Cover the entire container */
+  background-position: center;
+}
+.login-container .login-form {
+  float: right;
+  margin-right: 50px;
+  transform: translateY(50%);
+  max-width: 420px;
+  width: 100%;
+  padding: 2rem;
+  background-color: black;
+}
+.login-container .login-form s h2 {
+  margin-bottom: 20px;
+  font-size: 35px;
+}
+.login-container .login-form p {
+  color: gray;
+  margin: 20px 0;
+}
+.login-container .login-form .input-floating-label {
+  position: relative;
+  margin-bottom: 24px;
+  width: 100%;
+}
+.login-container .login-form .input-floating-label .input {
+  font-family: inherit;
+  width: 100%;
+  display: block;
+  border: 0;
+  border-bottom: 1px solid white;
+  border-radius: var(--border-radius);
+  outline: 0;
+  font-size: 1rem;
+  color: var(--color-input-text);
+  padding: 18px 12px;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.login-container .login-form .input-floating-label .input:required, .login-container .login-form .input-floating-label .input:invalid {
+  box-shadow: none;
+}
+.login-container .login-form .input-floating-label .input::-moz-placeholder {
+  color: transparent;
+}
+.login-container .login-form .input-floating-label .input::placeholder {
+  color: transparent;
+}
+.login-container .login-form .input-floating-label .input:-moz-placeholder-shown {
+  border-color: var(--color-border);
+}
+.login-container .login-form .input-floating-label .input:placeholder-shown {
+  border-color: var(--color-border);
+}
+.login-container .login-form .input-floating-label .input:-moz-placeholder-shown ~ label {
+  font-size: 1rem;
+  cursor: text;
+  transform: translateY(19px);
+  padding: 0px 0px;
+  color: hsl(230, 15%, 75%);
+}
+.login-container .login-form .input-floating-label .input:placeholder-shown ~ label {
+  font-size: 1rem;
+  cursor: text;
+  transform: translateY(19px);
+  padding: 0px 0px;
+  color: hsl(230, 15%, 75%);
+}
+.login-container .login-form .input-floating-label label {
+  position: absolute;
+  left: 12px;
+  display: block;
+  transform: translateY(-7px);
+  transition: 0.3s;
+  font-size: 0.75rem;
+  padding: 0px 8px;
+  color: hsl(230, 15%, 75%);
+  background: var(--form-bg);
+  top: 0;
+}
+.login-container .login-form .input-floating-label .input:focus {
+  border-color: var(--primary-color);
+}
+.login-container .login-form .input-floating-label .input:focus ~ label {
+  position: absolute;
+  transform: translateY(-7px);
+  color: var(--primary-color);
+  padding: 0px 8px;
+  font-size: 0.75rem;
+}
+.login-container .btn-submit {
+  margin-top: 10px;
+  width: 100%;
+}
+.login-container .btn-submit:focus {
+  box-shadow: 0px 0px 4px var(--primary-color);
+}
+.login-container .btn-submit:active {
+  transform: scale(1.04) translateY(2px);
+}/*# sourceMappingURL=Login.css.map */

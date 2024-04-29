@@ -14,35 +14,38 @@
   cursor: pointer;
   font-weight: 600;
 }
-.header ul {
+.header .header-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+}
+.header .header-options .menu-items {
   list-style: none;
   display: flex;
   align-items: normal;
   justify-content: space-between;
-  width: 13%;
+  width: 40%;
   height: 100%;
   color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
-.header ul li {
-  font-size: 1rem;
-  font-weight: 600;
-  padding-top: 22px;
-}
-.header ul .active {
-  border-bottom: 8px solid #000;
-}
-.header ul a {
+.header .header-options .menu-items a {
   display: flex;
   align-items: center;
   justify-content: normal;
+}
+.header .header-options .menu-items .now-showing {
+  color: #488cd7;
 }
 .header .profile-user {
   display: flex;
   align-items: center;
   justify-content: normal;
   gap: 10px;
-  font-weight: bold;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 1.25rem;
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;

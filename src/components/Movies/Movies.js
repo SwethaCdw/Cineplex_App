@@ -4,15 +4,21 @@ import { getMovies } from '../../services/getMovies';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import withAdvertisement from '../withAdvertisement/withAdvertisement';
-import AdvImage from '../../assets/advertisements/large-promos/adv-2.png';
+import AdvImage1 from '../../assets/advertisements/large-promos/adv1.png';
+import AdvImage2 from '../../assets/advertisements/large-promos/adv-2.png';
 
-
-const Movies = ({ moviePageCounter, showImage, imageCounter, setMoviePageCounter }) => {
+const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMoviePageCounter }) => {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [movies, setMovies] = useState([]);
     const [visibleMovies, setVisibleMovies] = useState(6); 
     const [totalMoviesLength, setTotalMoviesLength] = useState(0);
     const [likedMovies, setLikedMovies] = useState([]); 
+
+    const advertisementImages = [AdvImage1, AdvImage2];
+
+
+    const randomAdvertisementImage = advertisementImages[Math.floor(Math.random() * advertisementImages.length)];
+
 
     const handleLikeClick = (movieName) => {
         const updatedMovies = [...movies];
@@ -111,7 +117,7 @@ const Movies = ({ moviePageCounter, showImage, imageCounter, setMoviePageCounter
                 <div className='notification'>
                     {showImage ? (
                         <div>
-                        <img src={AdvImage} alt='advertisement' className='advertisement'/>
+                        <img src={randomAdvertisementImage} alt='advertisement' className='advertisement'/>
                         {imageCounter > 0 && <p>Resumes in {imageCounter}</p>}
                         </div>
                         ) : (
@@ -121,5 +127,5 @@ const Movies = ({ moviePageCounter, showImage, imageCounter, setMoviePageCounter
             </section>
         </div>
     );
-};
+});
 export default withAdvertisement(Movies);
