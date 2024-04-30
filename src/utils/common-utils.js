@@ -1,4 +1,4 @@
-import { FALLBACK_IMAGE } from "../constants/constants";
+import { FALLBACK_IMAGE } from "../constants/common-constants";
 
   
 /**
@@ -8,3 +8,12 @@ import { FALLBACK_IMAGE } from "../constants/constants";
 export const handleImageError = (event) => {
     event.target.src = FALLBACK_IMAGE;
 };
+
+/**
+ * get Random array value
+ * @param {*} array 
+ * @returns 
+ */
+export const getRandomItem = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+}

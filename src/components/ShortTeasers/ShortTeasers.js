@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import withAdvertisement from '../withAdvertisement/withAdvertisement';
 import AdvImage from '../../assets/advertisements/small-promos/AdvertisementSmall1.png';
+import { ADVERTISEMENT_IN, MOVIE_COUNTER, SHORT_TEASERS, VIDEO_RESUMES_IN } from "../../constants/movie-constants";
 
 
 const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageCounter }) => {
@@ -15,7 +16,7 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
     const handlePlayClick = (index) => {
         //Update show controls
         setShowControls(prevControls => prevControls.map((control, i) => i === index ? true : control));
-        setMoviePageCounter(5); 
+        setMoviePageCounter(MOVIE_COUNTER); 
         videoRefs.current[index].play();
     };
 
@@ -50,7 +51,7 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
 
     return ( 
         <section className="short-teasers-section">
-            <h1 className='short-teasers-heading'>Short Teasers</h1>
+            <h1 className='short-teasers-heading'>{SHORT_TEASERS}</h1>
             <div className="videos-container">
                 {getShortTeasers.teasers.map((teaser, index) => (
                     <div key={index} className="video-wrapper">
@@ -72,10 +73,10 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
                             {(showControls[index] === true && showImage) ? (
                             <div>
                                 <img src={AdvImage} alt='advertisement' className='advertisement'/>
-                                {imageCounter > 0 && <p>Video Resumes in {imageCounter}</p>}
+                                {imageCounter > 0 && <p>{VIDEO_RESUMES_IN} {imageCounter}</p>}
                             </div>
                             ) : ( (showControls[index] === true &&
-                            moviePageCounter > 0) && <p>Advertisement in {moviePageCounter}</p>
+                            moviePageCounter > 0) && <p>{ADVERTISEMENT_IN} {moviePageCounter}</p>
                             )}
                         </div> 
                     </div>

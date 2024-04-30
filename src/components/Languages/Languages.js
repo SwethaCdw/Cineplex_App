@@ -1,11 +1,11 @@
 import React from 'react';
 import './Languages.css';
-import { LANGUAGES } from '../../constants/constants';
+import { LANGUAGES, VIEW_OTHER_LANGUAGES } from '../../constants/common-constants';
 
 const Languages = () => {
     return (
         <section className='other-languages'>
-            <p>View in Other Languages</p>  
+            <p>{VIEW_OTHER_LANGUAGES}</p>  
             <ul className='language-list'>
             {LANGUAGES.map((language) => {
                     return (

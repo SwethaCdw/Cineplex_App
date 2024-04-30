@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import imgLogo from '../../assets/logo.png';
 import "./Header.css";
-import { MENU_ITEMS } from '../../constants/constants';
+import { LOGIN, LOGOUT, MENU_ITEMS, NOW_SHOWING } from '../../constants/common-constants';
 import { handleImageError } from '../../utils/common-utils';
-import { getItemFromLocalStorage, setItemInLocalStorage } from '../../utils/local-storage-utils';
+import { setItemInLocalStorage } from '../../utils/local-storage-utils';
+import { getUsername } from '../../utils/login-utils';
+import { ROUTES } from '../../constants/route-constants';
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const loggedIn = getItemFromLocalStorage('loggedIn');
-    setIsLoggedIn(loggedIn);
-    console.log(loggedIn);
-    const profileUser = getItemFromLocalStorage('username');
-    setUsername(profileUser);
+    const username = getUsername();
+    setUsername(username);
   }, []);
 
   const handleLogout = () => {
-    setItemInLocalStorage('loggedIn', 'false');
     setItemInLocalStorage('username', '');
+    navigate(ROUTES.LOGIN);
 
   }
   return (
     <section className='header'>            
-        <Link to="/">
-          <img src={imgLogo} className='app-logo' onError={handleImageError} alt='cineplex'></img>
+        <Link to={ROUTES.HOME}>
+          <img src={imgLogo} className='app-logo' onError={handleImageError} alt='cine-plex'></img>
         </Link>
           <div className='header-options'>
             <div className='menu-items'>
@@ -33,24 +33,24 @@ const Header = () => {
                       return (
                         <>
                           <NavLink 
-                            to={item === 'ALL MOVIES' ? '/all-movies' : '/'}
+                            to={item === 'ALL MOVIES' ? ROUTES.ALL_MOVIES : ROUTES.HOME}
                           >
                             {item.toUpperCase()}
                           </NavLink>                  
                         </>
                       );
                 })}
-                {isLoggedIn === true && <p>Now Showing</p>}
+                {username && <Link to={ROUTES.NOW_SHOWING}><p className='now-showing'>{NOW_SHOWING}</p></Link>}
             </div>
             {
-              isLoggedIn === true ? (
+              username?.length ? (
                 <p className='profile-user'>
-                {username} | <Link to='/login'><span onClick={handleLogout}>Logout</span></Link>
-              </p>
+                  {username} | <Link to={ROUTES.LOGIN}><span onClick={handleLogout}>{LOGOUT}</span></Link>
+                </p>
               ) : (
-                 <p className='profile-user'>
-                 <Link to='/login'>LOGIN</Link>
-               </p>
+                <p className='profile-user'>
+                  <Link to={ROUTES.LOGIN}>{LOGIN}</Link>
+                </p>
               )
             }
           </div> 

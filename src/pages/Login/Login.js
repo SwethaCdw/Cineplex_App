@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./Login.css";
 import { setItemInLocalStorage } from '../../utils/local-storage-utils';
 import { useNavigate } from 'react-router-dom';
+import { LOGIN_BUTTON, LOGIN_DESCRIPTION, LOGIN_TITLE, PASSWORD, USERNAME, USERNAME_TITLE } from '../../constants/login-constants';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,9 +13,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Example: Validate username and password
-    if (username === 'Swetha' && password === '123') {
-      setItemInLocalStorage('loggedIn', 'true');
+    if (username === USERNAME && password === PASSWORD) {
       setItemInLocalStorage('username', username);
       setUsername('');
       setPassword('');
@@ -29,18 +28,19 @@ const Login = () => {
   return (
      <div className='login-container'>
       <form class="login-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <p>Logging into CineFLEX will give you access to full videos and movies. You can sit back and relax and watch at your home</p>
+        <h2>{LOGIN_TITLE}</h2>
+        <p>{LOGIN_DESCRIPTION}</p>
         <div class="input-floating-label">
           <input 
             className="input" 
             type="text" 
             id="input" 
             name="input" 
+            placeholder='username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             />
-          <label for="input">Username</label>
+          <label for="input">{USERNAME_TITLE}</label>
           <span class="focus-bg"></span>
         </div>
         <div class="input-floating-label">
@@ -53,11 +53,11 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             />
-          <label for="input">Password</label>
+          <label for="input">{PASSWORD}</label>
           <span class="focus-bg"></span>
         </div>
         {error && <p className='error'>{error}</p>}
-        <button type='submit' class="btn-submit">LOGIN</button>
+        <button type='submit' class="btn-submit">{LOGIN_BUTTON}</button>
       </form>
     </div>
   )

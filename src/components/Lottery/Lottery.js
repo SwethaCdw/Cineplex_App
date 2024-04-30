@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import './Lottery.css';
 import CheckPrice from '../CheckPrice/CheckPrice';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import { LOTTERY_BUTTON_TEXT, LOTTERY_CAPTION } from '../../constants/common-constants';
 
 const Lottery = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false);  
     const [successMessage, setSuccessMessage] = useState('');
 
-    const handleButtonClick = () => {
+    const handleLotteryButtonClick = () => {
         setButtonClicked(true);
     };
 
@@ -19,14 +20,14 @@ const Lottery = () => {
   return (
     <section className='lottery'>      
         {!buttonClicked && <div className='input-section'>
-            <p className='lottery-caption'>Your Mobile Number can buy you exciting prices</p>  
+            <p className='lottery-caption'>{LOTTERY_CAPTION}</p>  
             <input
                 type="text"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder="Enter mobile number"
             /> 
-            <button onClick={handleButtonClick}>I'm Feeling Lucky</button>
+            <button onClick={handleLotteryButtonClick}>{LOTTERY_BUTTON_TEXT}</button>
             
         </div> }
         {buttonClicked && 

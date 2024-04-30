@@ -6,6 +6,9 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import withAdvertisement from '../withAdvertisement/withAdvertisement';
 import AdvImage1 from '../../assets/advertisements/large-promos/adv1.png';
 import AdvImage2 from '../../assets/advertisements/large-promos/adv-2.png';
+import { getRandomItem } from '../../utils/common-utils';
+import { ACTORS, LIKES, LOAD_MORE } from '../../constants/common-constants';
+import { ADVERTISEMENT_IN, TITLE, VIDEO_RESUMES_IN } from '../../constants/movie-constants';
 
 const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMoviePageCounter }) => {
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -15,9 +18,7 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
     const [likedMovies, setLikedMovies] = useState([]); 
 
     const advertisementImages = [AdvImage1, AdvImage2];
-
-
-    const randomAdvertisementImage = advertisementImages[Math.floor(Math.random() * advertisementImages.length)];
+    const randomAdvertisementImage = getRandomItem(advertisementImages);
 
 
     const handleLikeClick = (movieName) => {
@@ -69,7 +70,7 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
     return (
         <div className='movies-list-section'>
             <section className='all-movies'>
-                <p className='all-movies-title'>All Movies</p>
+                <p className='all-movies-title'>{TITLE}</p>
                 <div className='movie-list'>
                     {movies.map((movie, index) => (
                         <div className='movie' key={index}>  
@@ -77,7 +78,7 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
                             <div className='movie-details-container'>
                                 <div className='movie-details'>
                                     <p className='movie-name'>{movie.movie_name}</p>
-                                    <p className='movie-likes'>{movie.movie_likes} likes</p>
+                                    <p className='movie-likes'>{movie.movie_likes} {LIKES}</p>
                                 </div>
                                 <button className={`thumbs-up-button ${likedMovies.includes(movie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(movie.movie_name)}>
                                     <FontAwesomeIcon icon={faThumbsUp} />
@@ -88,7 +89,7 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
                 </div>
                 
                 {totalMoviesLength > visibleMovies && (<button className='load-more-btn' onClick={loadMoreMovies}>
-                    LOAD MORE
+                    {LOAD_MORE}
                 </button>)}
                 
             </section>
@@ -101,10 +102,10 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
                                     <FontAwesomeIcon icon={faThumbsUp} />
                             </button>
                         </div>
-                        <p className='selected-movie-likes'>{selectedMovie.movie_likes} likes</p>
+                        <p className='selected-movie-likes'>{selectedMovie.movie_likes} {LIKES}</p>
                         <img className='selected-movie-poster' src={selectedMovie.movie_poster} alt={selectedMovie.movie_name} />
                         <p className='selected-movie-description'>{selectedMovie.movie_description}</p>
-                        <h2 className='actors-title'>Actors</h2>
+                        <h2 className='actors-title'>{ACTORS}</h2>
                         <ul className='actors-list'>
                             {selectedMovie.movie_actors.map((actor, index) => (
                                 <li className='actor' key={index}>{actor}</li>
@@ -118,10 +119,10 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
                     {showImage ? (
                         <div>
                         <img src={randomAdvertisementImage} alt='advertisement' className='advertisement'/>
-                        {imageCounter > 0 && <p>Resumes in {imageCounter}</p>}
+                        {imageCounter > 0 && <p>{VIDEO_RESUMES_IN} {imageCounter}</p>}
                         </div>
                         ) : (
-                        moviePageCounter > 0 && <p>Advertisement in {moviePageCounter}</p>
+                        moviePageCounter > 0 && <p>{ADVERTISEMENT_IN} {moviePageCounter}</p>
                         )}
                 </div> 
             </section>

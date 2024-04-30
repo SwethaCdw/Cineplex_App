@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <>
     <Header/>
-    <img className='cover-picture' src={coverPicture} onError={handleImageError} alt='sindel'></img>
+    <img className='cover-picture' src={coverPicture} onError={handleImageError} alt='background'></img>
     <Lottery />
     <Trailers />
     <ShortTeasers />

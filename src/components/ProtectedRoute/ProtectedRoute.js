@@ -1,18 +1,16 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { getItemFromLocalStorage } from '../../utils/local-storage-utils';
+import { Navigate, Outlet } from 'react-router-dom'
+import { ROUTES } from '../../constants/route-constants';
 
-const isAuthenticated = () => {
-  return getItemFromLocalStorage('loggedIn') === 'true'; 
-};
+const ProtectedRoute = ({
+  username,
+  redirectPath = ROUTES.LOGIN,
+  children,
+}) => {
+  if (!username?.length) {
+    return <Navigate to={redirectPath} replace />;
+  }
 
-// ProtectedRoute component
-const ProtectedRoute = ({ element: Element }) => {
-  return isAuthenticated() ? (
-    <Element />
-  ) : (
-    <Navigate to="/login" />
-  );
+  return children ? children : <Outlet />;
 };
 
 export default ProtectedRoute;
