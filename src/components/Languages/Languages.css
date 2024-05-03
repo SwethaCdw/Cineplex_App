@@ -3,8 +3,9 @@
 }
 .other-languages .language-list {
   display: flex;
-  list-style: none;
   align-items: center;
+  justify-content: normal;
+  list-style: none;
   gap: 5px;
   margin-top: 15px;
 }
@@ -12,10 +13,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #4889d6;
+  color: #488cd7;
   font-size: 30px;
   width: 50px;
-  border: 1px solid #4889d6;
+  border: 1px solid #488cd7;
   height: 50px;
   text-decoration: none;
+  cursor: pointer;
 }/*# sourceMappingURL=Languages.css.map */

@@ -21,20 +21,13 @@ const SuspenseWrapper = ({ children }) => (
 );
 
 function App() {
-  const [username, setUsername] = useState('');
-
-  useEffect(() => {
-    const username = getUsername();
-    setUsername(username);
-  }, []);
-
   return (
     <Router>
       <Routes>
+      <Route path={ROUTES.LOGIN} element={<SuspenseWrapper> <LazyLogin /> </SuspenseWrapper>} />
         <Route path={ROUTES.HOME} element={<SuspenseWrapper><LazyHome /></SuspenseWrapper>} />
-        <Route path={ROUTES.LOGIN} element={<SuspenseWrapper>{username?.length ? <Navigate to={ROUTES.HOME} /> : <LazyLogin />}</SuspenseWrapper>} />
         <Route path={ROUTES.ALL_MOVIES} element={<SuspenseWrapper><LazyAllMovies /></SuspenseWrapper>} />
-        <Route element={<ProtectedRoute username={username} />} >
+        <Route element={<ProtectedRoute />} >
           <Route path={ROUTES.NOW_SHOWING} element={<SuspenseWrapper><LazyNowShowing /></SuspenseWrapper>} />
         </Route>
         <Route path={ROUTES.NOT_FOUND} element={<SuspenseWrapper><LazyNotFound /></SuspenseWrapper>} />
@@ -42,5 +35,5 @@ function App() {
     </Router>
   );
 }
-
+//{username?.length ? <Navigate to={ROUTES.HOME} />}
 export default App;

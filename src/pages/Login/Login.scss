@@ -1,7 +1,12 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
 .login-container {
     height: 100vh;
-    background-image: url('../../assets//sindel-background.png'); /* Example: URL to your background image */
-    background-size: cover; /* Cover the entire container */
+    background-image: url('../../assets//sindel-background.png'); 
+    background-size: cover; 
     background-position: center;
       .login-form{
         float: right;
@@ -10,13 +15,12 @@
         max-width:420px;
         width:100%;
         padding:2rem;
-        background-color: black;s
+        background-color: $primary-color;
         h2 {
             margin-bottom: 20px;
             font-size: 35px;
         }
         p {
-            color: gray;
             margin: 20px 0;
         }
         .input-floating-label {
@@ -29,7 +33,7 @@
               width: 100%;
               display:block;
               border: 0;
-              border-bottom: 1px solid white;
+              border-bottom: 1px solid $text-color;
               border-radius:var(--border-radius);
               outline: 0;
               font-size: 1rem;

@@ -1,44 +1,70 @@
 
 import React, { useState, useEffect } from 'react';
+import { getShortTeasers } from '../../services/getShortTeasers';
 
-const withAdvertisement = (WrappedComponent) => {
+const withAdvertisement = (WrappedComponent, isShortTeasers) => {
   return () => {
-    const [moviePageCounter, setMoviePageCounter] = useState(null);
-    const [showImage, setShowImage] = useState(false);
-    const [imageCounter, setImageCounter] = useState(null);
+    const [moviePageCounter, setMoviePageCounter] = useState(isShortTeasers ? Array.from({ length: getShortTeasers.teasers.length }, () => null) : [null]);
+    const [showImage, setShowImage] = useState(isShortTeasers ? Array.from({ length: getShortTeasers.teasers.length }, () => false) : [false]);
+    const [imageCounter, setImageCounter] = useState(isShortTeasers ? Array.from({ length: getShortTeasers.teasers.length }, () => 2) : [null]);
 
-    useEffect(() => {
-      setImageCounter(2);
-      const countdown = setInterval(() => {
-        if (moviePageCounter > 0) {
-          setMoviePageCounter(moviePageCounter - 1);
-        }
-      }, 1000);
-
-      if (moviePageCounter === 0) {
-            setShowImage(true);
-            clearTimeout(countdown);
-        }
-
-      return () => clearInterval(countdown);
-    }, [moviePageCounter]);
-
-    useEffect(() => {
-      if (showImage) {
-        const imageCountdown = setTimeout(() => {
-          if (imageCounter > 0) {
-            setImageCounter(imageCounter - 1);
+    useEffect(() => { 
+      const countdownIntervals = moviePageCounter?.map((counter, i) => {
+          if (counter > 0) {
+              return setInterval(() => {
+                  setMoviePageCounter(prevCounter => {
+                      const updatedCounter = [...prevCounter];
+                      updatedCounter[i] = Math.max(0, updatedCounter[i] - 1); // Decrease counter by 1, but ensure it doesn't go below 0
+                      if (updatedCounter[i] === 0) {
+                        setShowImage(prevShowImage => {
+                            const updatedShowImage = [...prevShowImage];
+                            updatedShowImage[i] = true; // Set showImage to true for the corresponding index
+                            return updatedShowImage;
+                        });
+                      if(!isShortTeasers) {
+                        setImageCounter([2]);
+                      }
+                    }
+                      return updatedCounter;
+                  });
+              }, 1000);
           }
-        }, 1000);
+          return null; // If counter is already 0, return null for this index
+      });
 
-        if (imageCounter === 0) {
-          setShowImage(false);
-          clearTimeout(imageCountdown);
+  
+      return () => {
+          // Clear all countdown intervals when component unmounts or when moviePageCounter changes
+          countdownIntervals.forEach(interval => clearInterval(interval));
+      };
+  }, [moviePageCounter]);
+
+  useEffect(() => {
+    const imageCountdownIntervals = showImage.map((isImageShown, i) => {
+        if (isImageShown) {
+            return setInterval(() => {
+                setImageCounter(prevImageCounter => {
+                    const updatedImageCounter = [...prevImageCounter];
+                    updatedImageCounter[i] = Math.max(0, updatedImageCounter[i] - 1); // Decrease counter by 1, but ensure it doesn't go below 0
+                    if (updatedImageCounter[i] === 0) {
+                      setShowImage(prevShowImage => {
+                          const updatedShowImage = [...prevShowImage];
+                          updatedShowImage[i] = false; // Set showImage to true for the corresponding index
+                          return updatedShowImage;
+                      });
+                  }
+                    return updatedImageCounter;
+                });
+            }, 1000);
         }
+        return null; // If image is not shown, return null for this index
+    });
 
-        return () => clearTimeout(imageCountdown);
-      }
-    }, [showImage, imageCounter]);
+    return () => {
+        // Clear all countdown intervals for image counter when component unmounts or when showImage changes
+        imageCountdownIntervals.forEach(interval => clearInterval(interval));
+    };
+}, [showImage, imageCounter]);
 
     return (
       <WrappedComponent

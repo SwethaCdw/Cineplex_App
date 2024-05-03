@@ -1,7 +1,12 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
 .now-showing-container {
     padding: 15px 200px;
     .now-showing-title {
-        color: #4889d6;
+        color: $secondary-color;
     }
     .sintel-title {
         margin: 20px 0;

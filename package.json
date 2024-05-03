@@ -29,21 +29,6 @@
     "test": "react-scripts test --watchAll --coverage",
     "eject": "react-scripts eject"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__mocks__/fileMock.js"
-    },
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "\\.css$"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json"
-    ]
-  },
   "eslintConfig": {
     "extends": [
       "react-app",

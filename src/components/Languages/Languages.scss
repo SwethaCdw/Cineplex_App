@@ -1,21 +1,24 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
 .other-languages {
     padding: 70px 100px;
     .language-list {
-        display: flex;
+        @include flex-align(normal, center);
         list-style: none;
-        align-items: center;
         gap:5px;
         margin-top: 15px;
         .language {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #4889d6;
+            @include flex-align(center, center);
+            color: $secondary-color;
             font-size: 30px;
             width: 50px;
-            border: 1px solid #4889d6;
+            border: 1px solid $secondary-color;
             height: 50px;
             text-decoration: none;
+            cursor: pointer;
         }
     }
     

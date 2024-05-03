@@ -6,17 +6,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import withAdvertisement from '../withAdvertisement/withAdvertisement';
 import AdvImage from '../../assets/advertisements/small-promos/AdvertisementSmall1.png';
-import { ADVERTISEMENT_IN, MOVIE_COUNTER, SHORT_TEASERS, VIDEO_RESUMES_IN } from "../../constants/movie-constants";
+import { ADVERTISEMENT_IN, SHORT_TEASERS, TEASER_COUNTER, VIDEO_RESUMES_IN } from "../../constants/movie-constants";
+import Image from "../../common/Image/Image";
+import { formatCounter, handleImageError } from "../../utils/common-utils";
 
 
 const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageCounter }) => {
+    console.log('COMPONENT :: Short teasers')
+
     const [showControls, setShowControls] = useState(Array(getShortTeasers.teasers.length).fill(false));
     const videoRefs = useRef(Array(getShortTeasers.teasers.length).fill(null));
 
     const handlePlayClick = (index) => {
         //Update show controls
         setShowControls(prevControls => prevControls.map((control, i) => i === index ? true : control));
-        setMoviePageCounter(MOVIE_COUNTER); 
+        setMoviePageCounter(prevCounter => {
+            const updatedCounter = [...prevCounter];
+            updatedCounter[index] = TEASER_COUNTER;
+            return updatedCounter;
+        });        
         videoRefs.current[index].play();
     };
 
@@ -26,7 +34,6 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
             video.pause();
             //Update show controls
             setShowControls(prevControls => prevControls.map((control, i) => i === index ? false : control));
-
         } 
     };
 
@@ -38,16 +45,26 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
 
     useEffect(() => {
         if (showImage) {
-            videoRefs.current.forEach(video => {
+            // Pause the video for all indices where showImage is true
+            videoRefs.current.forEach((video, index) => {
                 if (!video.paused) {
                     video.pause();
-                    setTimeout(() => {
-                        video.play();
-                    }, 2000);                
                 }
             });
-        } 
+        }
     }, [showImage]);
+
+ 
+    useEffect(() => {
+        // Play the video for all indices where imageCounter reaches 0
+        imageCounter.forEach((counter, index) => {
+            if (counter === 0 && showControls[index]) {
+                if (videoRefs.current[index] && videoRefs.current[index].paused) {
+                        videoRefs.current[index].play();
+                }
+            }
+        });
+    }, [imageCounter, showImage, showControls]);
 
     return ( 
         <section className="short-teasers-section">
@@ -57,7 +74,7 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
                     <div key={index} className="video-wrapper">
                        <>
                             <div className="video-overlay" style={{ display: showControls[index]  ? 'none' : 'flex' }}>
-                                <FontAwesomeIcon icon={faPlay} className="play-icon" onClick={() => handlePlayClick(index)} />
+                                <FontAwesomeIcon data-testid='play-button' icon={faPlay} className="play-icon" onClick={() => handlePlayClick(index)} />
                             </div>
                             <video
                                 ref={el => videoRefs.current[index] = el}
@@ -66,17 +83,18 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
                                 controls={showControls[index]}
                                 onClick={() => handlePauseClick(index)}
                                 onEnded={() => handleVideoEnded(index)}
+                                data-testid='video'
                             />
                             <h2>{teaser.title}</h2> 
                         </>
                         <div className='notification'>
-                            {(showControls[index] === true && showImage) ? (
+                            {(showControls[index] === true && showImage[index]) ? (
                             <div>
-                                <img src={AdvImage} alt='advertisement' className='advertisement'/>
-                                {imageCounter > 0 && <p>{VIDEO_RESUMES_IN} {imageCounter}</p>}
+                                <Image src={AdvImage} alt='advertisement' className='advertisement' onError={handleImageError}/>
+                                {imageCounter[index] > 0 && <p>{VIDEO_RESUMES_IN} {formatCounter(imageCounter[index])}</p>}
                             </div>
                             ) : ( (showControls[index] === true &&
-                            moviePageCounter > 0) && <p>{ADVERTISEMENT_IN} {moviePageCounter}</p>
+                            moviePageCounter[index] > 0) && <p>{ADVERTISEMENT_IN} {formatCounter(moviePageCounter[index])}</p>
                             )}
                         </div> 
                     </div>
@@ -86,4 +104,5 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
     );
 }
 
-export default withAdvertisement(ShortTeasers); 
+export default withAdvertisement(ShortTeasers, true); 
+

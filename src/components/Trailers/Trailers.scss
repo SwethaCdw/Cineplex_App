@@ -1,3 +1,8 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
 .trailers {
     padding: 70px 100px;
     .title {
@@ -5,6 +10,10 @@
     }
     .caption {
         font-size: 20px;
+        a{
+            text-decoration: revert;
+            color: blue;
+        }
     }
     .trailer-section {
         display: flex;
@@ -26,7 +35,7 @@
             }
             .watch-button {
                 padding: 12px 25px;
-                background-color: #d9bc2d;
+                background-color: $primary-button-color;
             }
         }
     }

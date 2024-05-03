@@ -17,3 +17,12 @@ export const handleImageError = (event) => {
 export const getRandomItem = (array) => {
     return array[Math.floor(Math.random() * array.length)];
 }
+
+export const formatCounter = (counter) => {
+    const minutes = Math.floor(counter / 60); 
+    const seconds = counter % 60; 
+
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${minutes}:${formattedSeconds}`;
+}

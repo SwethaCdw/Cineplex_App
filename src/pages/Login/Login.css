@@ -1,7 +1,7 @@
 .login-container {
   height: 100vh;
-  background-image: url("../../assets//sindel-background.png"); /* Example: URL to your background image */
-  background-size: cover; /* Cover the entire container */
+  background-image: url("../../assets//sindel-background.png");
+  background-size: cover;
   background-position: center;
 }
 .login-container .login-form {
@@ -11,14 +11,13 @@
   max-width: 420px;
   width: 100%;
   padding: 2rem;
-  background-color: black;
+  background-color: #000;
 }
-.login-container .login-form s h2 {
+.login-container .login-form h2 {
   margin-bottom: 20px;
   font-size: 35px;
 }
 .login-container .login-form p {
-  color: gray;
   margin: 20px 0;
 }
 .login-container .login-form .input-floating-label {
@@ -31,7 +30,7 @@
   width: 100%;
   display: block;
   border: 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #fff;
   border-radius: var(--border-radius);
   outline: 0;
   font-size: 1rem;

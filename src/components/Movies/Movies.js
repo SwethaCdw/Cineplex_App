@@ -4,21 +4,23 @@ import { getMovies } from '../../services/getMovies';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import withAdvertisement from '../withAdvertisement/withAdvertisement';
-import AdvImage1 from '../../assets/advertisements/large-promos/adv1.png';
-import AdvImage2 from '../../assets/advertisements/large-promos/adv-2.png';
-import { getRandomItem } from '../../utils/common-utils';
+import  AdvImage1  from '../../assets/advertisements/large-promos/adv1.png';
+import  AdvImage2  from '../../assets/advertisements/large-promos/adv-2.png';
+import { formatCounter, getRandomItem, handleImageError } from '../../utils/common-utils';
 import { ACTORS, LIKES, LOAD_MORE } from '../../constants/common-constants';
-import { ADVERTISEMENT_IN, TITLE, VIDEO_RESUMES_IN } from '../../constants/movie-constants';
+import { ADVERTISEMENT_IN, DESCRIPTION_COUNTER, RESUMES_IN, TITLE, VISIBLE_MOVIES_COUNTER } from '../../constants/movie-constants';
+import Button from '../../common/Button/Button';
+import Image from '../../common/Image/Image';
 
 const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMoviePageCounter }) => {
+    console.log('COMPONENT :: Movies')
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [movies, setMovies] = useState([]);
-    const [visibleMovies, setVisibleMovies] = useState(6); 
+    const [visibleMovies, setVisibleMovies] = useState(VISIBLE_MOVIES_COUNTER); 
     const [totalMoviesLength, setTotalMoviesLength] = useState(0);
     const [likedMovies, setLikedMovies] = useState([]); 
+    const [randomAdvertisementImage, setRandomAdvertisementImage] = useState('');
 
-    const advertisementImages = [AdvImage1, AdvImage2];
-    const randomAdvertisementImage = getRandomItem(advertisementImages);
 
 
     const handleLikeClick = (movieName) => {
@@ -39,16 +41,25 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
     
     const handleMovieClick = (movie) => {
         setSelectedMovie(movie);
+        setMoviePageCounter([DESCRIPTION_COUNTER]);      
     };
 
     useEffect(() => {
-        setMoviePageCounter(5); 
+        setMoviePageCounter([DESCRIPTION_COUNTER]); 
         fetchMovies();
+        const advertisementImages = [AdvImage1, AdvImage2];
+        const adImage = getRandomItem(advertisementImages);
+        setRandomAdvertisementImage(adImage);
     }, []);
 
     const fetchMovies = async () => {
+        console.log('fetch movies');
         try {
-            const { movies, totalLength } = await getMovies(visibleMovies); // Fetch initial set of movies
+            const response = await getMovies(visibleMovies);
+            if (!response || !response.movies) {
+                throw new Error('Movies not found in API response');
+            }
+            const { movies, totalLength } = response;
             setMovies(movies);
             setSelectedMovie(movies[0]);
             setTotalMoviesLength(totalLength);
@@ -59,9 +70,9 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
 
     const loadMoreMovies = async () => {
         try {
-            const { movies } = await getMovies(visibleMovies + 6); // Fetch additional movies
+            const { movies } = await getMovies(visibleMovies + VISIBLE_MOVIES_COUNTER); // Fetch additional movies
             setMovies(movies);
-            setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 6); // Increase the number of visible movies
+            setVisibleMovies(prevVisibleMovies => prevVisibleMovies + VISIBLE_MOVIES_COUNTER); // Increase the number of visible movies
         } catch (error) {
             console.error('Error loading more movies:', error);
         }
@@ -74,36 +85,30 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
                 <div className='movie-list'>
                     {movies.map((movie, index) => (
                         <div className='movie' key={index}>  
-                            <img src={movie.movie_poster} alt={movie.movie_name} onClick={() => handleMovieClick(movie)}/>
+                            <Image  src={movie.movie_poster} alt={movie.movie_name} onError={handleImageError} onClick={() => handleMovieClick(movie)}/>
                             <div className='movie-details-container'>
                                 <div className='movie-details'>
                                     <p className='movie-name'>{movie.movie_name}</p>
                                     <p className='movie-likes'>{movie.movie_likes} {LIKES}</p>
                                 </div>
-                                <button className={`thumbs-up-button ${likedMovies.includes(movie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(movie.movie_name)}>
-                                    <FontAwesomeIcon icon={faThumbsUp} />
-                                </button>
+                                <Button data-testid='like-button' className={`thumbs-up-button ${likedMovies.includes(movie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(movie.movie_name)} children={ <FontAwesomeIcon icon={faThumbsUp} role='like-button' />} />
                             </div>
                         </div>
                     ))}
                 </div>
                 
-                {totalMoviesLength > visibleMovies && (<button className='load-more-btn' onClick={loadMoreMovies}>
-                    {LOAD_MORE}
-                </button>)}
+                {totalMoviesLength > visibleMovies && (<Button className='load-more-btn' onClick={loadMoreMovies} children={LOAD_MORE} />)}
                 
             </section>
             <section className='movies-description'>
-                {(selectedMovie && !showImage )&& (
+                {(selectedMovie && !showImage[0] )&& (
                     <div className='selected-movie-details'>
                         <div className='selected-movie'>
                             <h2 className='selected-movie-name'>{selectedMovie.movie_name}</h2>
-                            <button className={`thumbs-up-button ${likedMovies.includes(selectedMovie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(selectedMovie.movie_name)}>
-                                    <FontAwesomeIcon icon={faThumbsUp} />
-                            </button>
+                            <Button className={`thumbs-up-button description ${likedMovies.includes(selectedMovie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(selectedMovie.movie_name)} children={ <FontAwesomeIcon icon={faThumbsUp} />}  />
                         </div>
                         <p className='selected-movie-likes'>{selectedMovie.movie_likes} {LIKES}</p>
-                        <img className='selected-movie-poster' src={selectedMovie.movie_poster} alt={selectedMovie.movie_name} />
+                        <Image className='selected-movie-poster' src={selectedMovie.movie_poster} alt={selectedMovie.movie_name} onError={handleImageError} />
                         <p className='selected-movie-description'>{selectedMovie.movie_description}</p>
                         <h2 className='actors-title'>{ACTORS}</h2>
                         <ul className='actors-list'>
@@ -116,17 +121,17 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
                   
                 )}
                 <div className='notification'>
-                    {showImage ? (
-                        <div>
-                        <img src={randomAdvertisementImage} alt='advertisement' className='advertisement'/>
-                        {imageCounter > 0 && <p>{VIDEO_RESUMES_IN} {imageCounter}</p>}
+                    {showImage[0] ? (
+                        <div className='ad-notify-container'>
+                        <Image src={randomAdvertisementImage} alt='advertisement' className='advertisement' onError={handleImageError}/>
+                        {imageCounter > 0 && <p>{RESUMES_IN} {formatCounter(imageCounter)}</p>}
                         </div>
                         ) : (
-                        moviePageCounter > 0 && <p>{ADVERTISEMENT_IN} {moviePageCounter}</p>
+                        moviePageCounter > 0 && <p>{ADVERTISEMENT_IN} {formatCounter(moviePageCounter)}</p>
                         )}
                 </div> 
             </section>
         </div>
     );
 });
-export default withAdvertisement(Movies);
+export default withAdvertisement(Movies, false);

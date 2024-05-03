@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 
-const CheckPrice = ({phoneNumber, setMessage}) => {
+const CheckPrice = ({phoneNumber, setMessage, setError}) => {
 
     useEffect(() => {
    if (!phoneNumber || phoneNumber.length !== 10 || !/^\d+$/.test(phoneNumber)) {
         // Invalid phone number format
-        throw new Error('Sorry :( Better Luck Next Time');
+        setError('Invalid phone number')
+        return;
       }
   
       if (parseInt(phoneNumber.charAt(9)) % 2 === 0) {
@@ -13,7 +14,7 @@ const CheckPrice = ({phoneNumber, setMessage}) => {
       } else {
         throw new Error('Sorry! Better Luck Next Time');
       }
-    }, [phoneNumber, setMessage])
+    }, [phoneNumber, setMessage, setError])
 
     return (
         <>

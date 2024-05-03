@@ -25,7 +25,8 @@
   display: flex;
   align-items: normal;
   justify-content: space-between;
-  width: 40%;
+  width: auto;
+  gap: 50px;
   height: 100%;
   color: white;
   font-size: 1.25rem;
@@ -36,7 +37,7 @@
   align-items: center;
   justify-content: normal;
 }
-.header .header-options .menu-items .now-showing {
+.header .header-options .menu-items .active {
   color: #488cd7;
 }
 .header .profile-user {

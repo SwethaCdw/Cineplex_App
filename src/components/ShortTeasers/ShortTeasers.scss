@@ -1,3 +1,8 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
 .short-teasers-section {
     padding: 0px 100px;
     .short-teasers-heading {
@@ -36,7 +41,7 @@
                 p {
                     margin-top: 5px;
                     font-size: 16px;
-                    color: #488cd7;
+                    color: $secondary-color;
                 }
                 .advertisement {
                     width: 500px;

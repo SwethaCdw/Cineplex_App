@@ -7,6 +7,11 @@
 .trailers .caption {
   font-size: 20px;
 }
+.trailers .caption a {
+  -webkit-text-decoration: revert;
+          text-decoration: revert;
+  color: blue;
+}
 .trailers .trailer-section {
   display: flex;
   margin-top: 20px;

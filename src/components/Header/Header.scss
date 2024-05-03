@@ -5,7 +5,7 @@
 
 .header {
     @include flex-align(space-between, center);
-    background-color: $tab-color;
+    background-color: $primary-color;
     height: 65px;
     padding: 0 35px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -17,14 +17,13 @@
         font-weight: 600;
     }
     .header-options {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        @include flex-align(space-between, center);
         width: 60%;
         .menu-items {
             list-style: none;
             @include flex-align(space-between, normal);
-            width: 40%;
+            width: auto;
+            gap: 50px;        
             height: 100%;
             color: white;
             font-size: 1.25rem;
@@ -32,8 +31,8 @@
             a {
                 @include flex-align(normal, center);
             }
-            .now-showing {
-                color: #488cd7;
+            .active {
+                color: $secondary-color
             }
         }
     }

@@ -4,6 +4,8 @@ import Header from '../../components/Header/Header';
 import { NOW_SHOWING_TITLE, TRAILERS_DESCRIPTION, TRAILERS_NAME, TRAILER_VIDEO_URL } from '../../constants/common-constants';
 
 const NowShowing = () => {
+  console.log('COMPONENT :: Now Showing')
+
   return (
     <>
         <Header/>

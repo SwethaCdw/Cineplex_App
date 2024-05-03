@@ -24,7 +24,7 @@ export const VIEW_OTHER_LANGUAGES = 'View in Other Languages';
 
 export const LIKES = 'likes';
 export const LOAD_MORE = 'LOAD MORE';
-export const ACTORS = 'Actors';
+export const ACTORS = 'ACTORS';
 
 export const NOW_SHOWING_TITLE = 'Now Showing';
 export const TRAILER_VIDEO_URL = 'https://tympanus.net/Development/SeatPreview/media/sintel.mp4';
