@@ -5,14 +5,14 @@
 }
 
 body {
-  background-color: #151515;
-  color: white;
+  background-color: #000;
+  color: #fff;
 }
 
 button {
   background-color: #d9bc2d;
   padding: 15px 30px;
-  color: white;
+  color: #fff;
   border: none;
   font-size: 17px;
   font-weight: 700;
@@ -21,7 +21,7 @@ button {
 
 a {
   text-decoration: none;
-  color: white;
+  color: #fff;
 }
 
 .error {

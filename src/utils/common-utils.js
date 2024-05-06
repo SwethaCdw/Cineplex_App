@@ -1,4 +1,5 @@
 import { FALLBACK_IMAGE } from "../constants/common-constants";
+import { DOUBLE_DIGIT_START, SECONDS_IN_MINUTE } from "../constants/time-constants";
 
   
 /**
@@ -24,10 +25,10 @@ export const getRandomItem = (array) => {
  * @returns 
  */
 export const formatCounter = (counter) => {
-    const minutes = Math.floor(counter / 60); 
-    const seconds = counter % 60; 
+    const minutes = Math.floor(counter / SECONDS_IN_MINUTE); 
+    const seconds = counter % SECONDS_IN_MINUTE; 
 
-    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+    const formattedSeconds = seconds < DOUBLE_DIGIT_START ? `0${seconds}` : seconds;
 
     return `${minutes}:${formattedSeconds}`;
 }
