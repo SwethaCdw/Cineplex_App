@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import imgLogo from '../../assets/logo.png';
 import "./Header.css";
 import { LOGIN, LOGOUT, MENU_ITEMS, NOW_SHOWING } from '../../constants/common-constants';
 import { handleImageError } from '../../utils/common-utils';
-import { setItemInLocalStorage } from '../../utils/local-storage-utils';
-import { getUsername } from '../../utils/login-utils';
+import { getUsername, handleLogout } from '../../utils/login-utils';
 import { ROUTES } from '../../constants/route-constants';
 import Image from '../../common/Image/Image';
 
@@ -13,18 +12,13 @@ const Header = () => {
   console.log('COMPONENT :: Header')
 
   const [username, setUsername] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     const username = getUsername();
     setUsername(username);
   }, []);
 
-  const handleLogout = () => {
-    setItemInLocalStorage('username', '');
-    navigate(ROUTES.LOGIN);
-
-  }
+ 
   return (
     <section className='header'>            
         <Link to={ROUTES.HOME}>

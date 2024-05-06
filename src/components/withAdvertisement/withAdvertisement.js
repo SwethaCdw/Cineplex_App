@@ -1,12 +1,37 @@
 
 import React, { useState, useEffect } from 'react';
-import { getShortTeasers } from '../../services/getShortTeasers';
 
 const withAdvertisement = (WrappedComponent, isShortTeasers) => {
   return () => {
-    const [moviePageCounter, setMoviePageCounter] = useState(isShortTeasers ? Array.from({ length: getShortTeasers.teasers.length }, () => null) : [null]);
-    const [showImage, setShowImage] = useState(isShortTeasers ? Array.from({ length: getShortTeasers.teasers.length }, () => false) : [false]);
-    const [imageCounter, setImageCounter] = useState(isShortTeasers ? Array.from({ length: getShortTeasers.teasers.length }, () => 2) : [null]);
+    const [teasers, setTeasers] = useState([]);
+    const [moviePageCounter, setMoviePageCounter] = useState(isShortTeasers ? [] : [null]);
+    const [showImage, setShowImage] = useState(isShortTeasers ? [] : [false]);
+    const [imageCounter, setImageCounter] = useState(isShortTeasers ? []: [null]);
+    useEffect(() => {
+      const fetchTeasers = async () => {
+        try {
+          const response = await fetch('/resources/shortTeasers.json'); 
+          const data = await response.json();
+          setTeasers(data.teasers);
+
+          if(data.teasers) {
+            if(isShortTeasers) {
+              setMoviePageCounter(Array.from({ length: data.teasers.length }, () => null));
+              setShowImage(Array.from({ length: data.teasers.length }, () => false));
+              setImageCounter(Array.from({ length: data.teasers.length }, () => 2) );
+            } else {
+              setMoviePageCounter([null]);
+              setShowImage([false]);
+              setImageCounter([null]);
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching short teasers:', error);
+        }
+      };
+  
+      fetchTeasers();
+    }, [teasers.length]);
 
     useEffect(() => { 
       const countdownIntervals = moviePageCounter?.map((counter, i) => {

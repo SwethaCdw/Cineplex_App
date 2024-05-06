@@ -1,7 +1,6 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import './ShortTeasers.css';
-import { getShortTeasers } from "../../services/getShortTeasers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import withAdvertisement from '../withAdvertisement/withAdvertisement';
@@ -13,10 +12,37 @@ import { formatCounter, handleImageError } from "../../utils/common-utils";
 
 const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageCounter }) => {
     console.log('COMPONENT :: Short teasers')
+    const [teasers, setTeasers] = useState([]);
+    const [showControls, setShowControls] = useState([]);
+    const videoRefs = useRef([]);
 
-    const [showControls, setShowControls] = useState(Array(getShortTeasers.teasers.length).fill(false));
-    const videoRefs = useRef(Array(getShortTeasers.teasers.length).fill(null));
+    /**
+     * Fetch Teasers from json
+     */
+    useEffect(() => {
+      const fetchTeasers = async () => {
+        try {
+          const response = await fetch('/resources/shortTeasers.json'); 
+          const data = await response.json();
+          setTeasers(data.teasers);
 
+          if(data.teasers) {
+            setShowControls(Array(teasers.length).fill(false))
+            videoRefs.current = Array(teasers.length).fill(null)
+          }
+        } catch (error) {
+          console.error('Error fetching short teasers:', error);
+        }
+      };
+  
+      fetchTeasers();
+    }, [teasers.length]);
+
+
+    /**
+     * Handle click on play button
+     * @param {*} index 
+     */
     const handlePlayClick = (index) => {
         //Update show controls
         setShowControls(prevControls => prevControls.map((control, i) => i === index ? true : control));
@@ -28,24 +54,32 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
         videoRefs.current[index].play();
     };
 
+    /**
+     * Handle Video pause click
+     * @param {*} index 
+     */
     const handlePauseClick = (index) => {
         const video = videoRefs.current[index];
         if (!video.paused) {
             video.pause();
-            //Update show controls
             setShowControls(prevControls => prevControls.map((control, i) => i === index ? false : control));
         } 
     };
 
+    /**
+     * Handle when video ends
+     * @param {*} index 
+     */
     const handleVideoEnded = (index) => {
-        //Update show controls on video end
         setShowControls(prevControls => prevControls.map((control, i) => i === index ? false : control));
 
     };
 
+    /**
+     * Pause the video when Ad is shown
+     */
     useEffect(() => {
         if (showImage) {
-            // Pause the video for all indices where showImage is true
             videoRefs.current.forEach((video, index) => {
                 if (!video.paused) {
                     video.pause();
@@ -54,9 +88,10 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
         }
     }, [showImage]);
 
- 
+    /**
+     * Play after the Ad is shown
+     */
     useEffect(() => {
-        // Play the video for all indices where imageCounter reaches 0
         imageCounter.forEach((counter, index) => {
             if (counter === 0 && showControls[index]) {
                 if (videoRefs.current[index] && videoRefs.current[index].paused) {
@@ -68,9 +103,9 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
 
     return ( 
         <section className="short-teasers-section">
-            <h1 className='short-teasers-heading'>{SHORT_TEASERS}</h1>
+            <h1 className='short-teasers-heading' data-testid="short-teasers-title">{SHORT_TEASERS}</h1>
             <div className="videos-container">
-                {getShortTeasers.teasers.map((teaser, index) => (
+                {teasers.map((teaser, index) => (
                     <div key={index} className="video-wrapper">
                        <>
                             <div className="video-overlay" style={{ display: showControls[index]  ? 'none' : 'flex' }}>

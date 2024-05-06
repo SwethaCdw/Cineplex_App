@@ -1,7 +1,8 @@
 import React from 'react';
 import "./NowShowing.css";
 import Header from '../../components/Header/Header';
-import { NOW_SHOWING_TITLE, TRAILERS_DESCRIPTION, TRAILERS_NAME, TRAILER_VIDEO_URL } from '../../constants/common-constants';
+import { TRAILERS_DESCRIPTION, TRAILERS_NAME, TRAILER_VIDEO_URL } from '../../constants/trailer-constants';
+import { NOW_SHOWING_TITLE } from '../../constants/common-constants';
 
 const NowShowing = () => {
   console.log('COMPONENT :: Now Showing')

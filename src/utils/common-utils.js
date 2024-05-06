@@ -18,6 +18,11 @@ export const getRandomItem = (array) => {
     return array[Math.floor(Math.random() * array.length)];
 }
 
+/**
+ * Convert counter to a format
+ * @param {*} counter 
+ * @returns 
+ */
 export const formatCounter = (counter) => {
     const minutes = Math.floor(counter / 60); 
     const seconds = counter % 60; 
@@ -25,4 +30,15 @@ export const formatCounter = (counter) => {
     const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
     return `${minutes}:${formattedSeconds}`;
+}
+
+/**
+ * Restrict given input to given length
+ * @param {*} input 
+ * @param {*} length 
+ * @returns 
+ */
+export const restrictInput = (input, length) => {
+    const resultInput = input.slice(0, length).replace(/\D/g, '')
+    return resultInput;
 }

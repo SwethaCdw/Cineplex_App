@@ -21,8 +21,10 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
     const [likedMovies, setLikedMovies] = useState([]); 
     const [randomAdvertisementImage, setRandomAdvertisementImage] = useState('');
 
-
-
+    /**
+     * Handle Like click
+     * @param {*} movieName 
+     */
     const handleLikeClick = (movieName) => {
         const updatedMovies = [...movies];
         const movieToUpdate = updatedMovies.find(movie => movie.movie_name === movieName);
@@ -39,6 +41,10 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
         }
     };
     
+    /**
+     * Handle movie click
+     * @param {*} movie 
+     */
     const handleMovieClick = (movie) => {
         setSelectedMovie(movie);
         setMoviePageCounter([DESCRIPTION_COUNTER]);      
@@ -52,8 +58,10 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
         setRandomAdvertisementImage(adImage);
     }, []);
 
+    /**
+     * Fetch movies from API
+     */
     const fetchMovies = async () => {
-        console.log('fetch movies');
         try {
             const response = await getMovies(visibleMovies);
             if (!response || !response.movies) {
@@ -68,6 +76,9 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
         }
     };
 
+    /**
+     * Load more movies on click of Load more button
+     */
     const loadMoreMovies = async () => {
         try {
             const { movies } = await getMovies(visibleMovies + VISIBLE_MOVIES_COUNTER); // Fetch additional movies
@@ -88,16 +99,16 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
                             <Image  src={movie.movie_poster} alt={movie.movie_name} onError={handleImageError} onClick={() => handleMovieClick(movie)}/>
                             <div className='movie-details-container'>
                                 <div className='movie-details'>
-                                    <p className='movie-name'>{movie.movie_name}</p>
+                                    <p data-testid='movie-name' className='movie-name'>{movie.movie_name}</p>
                                     <p className='movie-likes'>{movie.movie_likes} {LIKES}</p>
                                 </div>
-                                <Button data-testid='like-button' className={`thumbs-up-button ${likedMovies.includes(movie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(movie.movie_name)} children={ <FontAwesomeIcon icon={faThumbsUp} role='like-button' />} />
+                                <Button  className={`thumbs-up-button ${likedMovies.includes(movie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(movie.movie_name)} children={ <FontAwesomeIcon icon={faThumbsUp} />} />
                             </div>
                         </div>
                     ))}
                 </div>
-                
-                {totalMoviesLength > visibleMovies && (<Button className='load-more-btn' onClick={loadMoreMovies} children={LOAD_MORE} />)}
+                {totalMoviesLength > visibleMovies && (<Button className='load-more-btn' onClick={loadMoreMovies} children={LOAD_MORE}></Button> )}
+
                 
             </section>
             <section className='movies-description'>
@@ -105,7 +116,7 @@ const Movies = React.memo(({ moviePageCounter, showImage, imageCounter, setMovie
                     <div className='selected-movie-details'>
                         <div className='selected-movie'>
                             <h2 className='selected-movie-name'>{selectedMovie.movie_name}</h2>
-                            <Button className={`thumbs-up-button description ${likedMovies.includes(selectedMovie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(selectedMovie.movie_name)} children={ <FontAwesomeIcon icon={faThumbsUp} />}  />
+                            <Button data-testid='like-button'  className={`thumbs-up-button description ${likedMovies.includes(selectedMovie.movie_name) ? 'liked' : ''}`} onClick={() => handleLikeClick(selectedMovie.movie_name)} children={ <FontAwesomeIcon icon={faThumbsUp} />}  />
                         </div>
                         <p className='selected-movie-likes'>{selectedMovie.movie_likes} {LIKES}</p>
                         <Image className='selected-movie-poster' src={selectedMovie.movie_poster} alt={selectedMovie.movie_name} onError={handleImageError} />

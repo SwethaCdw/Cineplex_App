@@ -23,7 +23,7 @@
 .short-teasers-section .videos-container .video-wrapper .play-icon {
   height: 2em;
   position: absolute;
-  top: 50%;
+  top: 46%;
   transform: translate(240%, -85%);
   background-color: transparent;
   color: white;
@@ -35,6 +35,9 @@
 .short-teasers-section .videos-container .video-wrapper .play-icon svg {
   height: 3rem;
 }
+.short-teasers-section .videos-container .video-wrapper .notification {
+  height: 35px;
+}
 .short-teasers-section .videos-container .video-wrapper .notification p {
   margin-top: 5px;
   font-size: 16px;
@@ -42,7 +45,7 @@
 }
 .short-teasers-section .videos-container .video-wrapper .notification .advertisement {
   width: 500px;
-  height: 300px;
+  height: 275px;
   -o-object-fit: cover;
      object-fit: cover;
   position: absolute;

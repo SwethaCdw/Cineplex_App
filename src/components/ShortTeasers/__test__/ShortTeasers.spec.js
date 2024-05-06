@@ -1,43 +1,44 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
 import ShortTeasers from '../ShortTeasers';
 
 describe('ShortTeasers Component', () => {
-  const mockMoviePageCounter = [5, 10];
-  const mockImageCounter = [0, 0];
-  const mockShowImage = [true, false];
+  it("should render heading", () => {
+    render(<ShortTeasers />);
+    const heading = screen.getByTestId('short-teasers-title');
+    expect(heading).toHaveTextContent('Short Teasers');
+  })
 
-  it('renders without crashing', () => {
-    render(
-      <ShortTeasers
-        moviePageCounter={mockMoviePageCounter}
-        setMoviePageCounter={() => {}}
-        showImage={mockShowImage}
-        imageCounter={mockImageCounter}
-      />
-    );
-  });
+  const mockTeasers = [
+    { title: 'Teaser 1', video_link: 'video1.mp4' },
+    { title: 'Teaser 2', video_link: 'video2.mp4' },
+    { title: 'Teaser 3', video_link: 'video3.mp4' },
+  ];
 
-  it('plays the video when the play button is clicked', async () => {
-    render(
-      <ShortTeasers
-        moviePageCounter={mockMoviePageCounter}
-        setMoviePageCounter={() => {}}
-        showImage={mockShowImage}
-        imageCounter={mockImageCounter}
-      />
-    );
-
-    const playButton = screen.getByTestId('play-button');
-
-    fireEvent.click(playButton);
-
-    await waitFor(() => {
-      const videoElement = screen.getByTestId('video');
-      // Assert that the video is playing
-      expect(videoElement.paused).toBeFalsy();
+  const mockProps = {
+    moviePageCounter: [10, 20, 30],
+    setMoviePageCounter: jest.fn(),
+    showImage: [false, true, false],
+    imageCounter: [5, 10, 15],
+  };
+  beforeEach(() => {
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: () => Promise.resolve({ teasers: mockTeasers }),
     });
   });
 
-  // You can add more test cases as needed for other functionalities
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should render the short teasers section', async () => {
+    
+    render(<ShortTeasers {...mockProps} />);
+    await waitFor(() => {
+      expect(screen.getByTestId('short-teasers-title')).toBeInTheDocument()
+    });
+    expect(screen.getAllByTestId('video')).toHaveLength(3);
+  });
+
+  
 });

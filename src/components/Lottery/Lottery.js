@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './Lottery.css';
 import CheckPrice from '../CheckPrice/CheckPrice';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import { LOTTERY_BUTTON_TEXT, LOTTERY_CAPTION } from '../../constants/common-constants';
+import { LOTTERY_BUTTON_TEXT, LOTTERY_CAPTION } from '../../constants/lottery-constants';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
+import { restrictInput } from '../../utils/common-utils';
 
 const Lottery = () => {
     console.log('COMPONENT :: Lottery')
@@ -14,14 +15,22 @@ const Lottery = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     
+
+    /**
+     * On Lottery Button Click
+     */
     const handleLotteryButtonClick = () => {
         console.log('lottery button click')
         setButtonClicked(true);
     };
 
+    /**
+     * Handle phone number change
+     * @param {*} e 
+     */
     const handlePhoneNumberChange = (e) => {
         const input = e.target.value;
-        const mobileNumber = input.slice(0, 10).replace(/\D/g, ''); 
+        const mobileNumber = restrictInput(input, 10); 
         setPhoneNumber(mobileNumber);
       };
 

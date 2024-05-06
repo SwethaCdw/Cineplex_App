@@ -25,7 +25,7 @@
             .play-icon {
                 height: 2em;
                 position: absolute;
-                top: 50%;
+                top: 46%;
                 transform: translate(240%, -85%);
                 background-color: transparent;
                 color: white;
@@ -38,6 +38,7 @@
                 }
             }
             .notification {
+                height: 35px;
                 p {
                     margin-top: 5px;
                     font-size: 16px;
@@ -45,7 +46,7 @@
                 }
                 .advertisement {
                     width: 500px;
-                    height: 300px;
+                    height: 275px;
                     object-fit: cover;
                     position: absolute;
                     top: 0%;

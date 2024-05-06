@@ -13,8 +13,11 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-
-  const handleSubmit = (e) => {
+  /**
+   * Handle Login 
+   * @param {*} e 
+   */
+  const handleLogin = (e) => {
     e.preventDefault();
     if (username === USERNAME && password === PASSWORD) {
       setItemInLocalStorage('username', username);
@@ -30,7 +33,7 @@ const Login = () => {
 
   return (
      <div className='login-container'>
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleLogin}>
         <h2>{LOGIN_TITLE}</h2>
         <p>{LOGIN_DESCRIPTION}</p>
         <div className="input-floating-label">
