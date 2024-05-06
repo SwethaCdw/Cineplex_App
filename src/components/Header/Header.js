@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import imgLogo from '../../assets/logo.png';
 import "./Header.css";
@@ -10,14 +10,6 @@ import Image from '../../common/Image/Image';
 
 const Header = () => {
   console.log('COMPONENT :: Header')
-
-  const [username, setUsername] = useState('');
-
-  useEffect(() => {
-    const username = getUsername();
-    setUsername(username);
-  }, []);
-
  
   return (
     <section className='header'>            
@@ -38,12 +30,12 @@ const Header = () => {
                 </React.Fragment>
               );
             })}
-                {username && <NavLink to={ROUTES.NOW_SHOWING} className={({ isActive }) => (isActive ? 'active' : '')}><p className='now-showing'>{NOW_SHOWING}</p></NavLink>}
+                {getUsername() && <NavLink to={ROUTES.NOW_SHOWING} className={({ isActive }) => (isActive ? 'active' : '')}><p className='now-showing'>{NOW_SHOWING}</p></NavLink>}
             </div>
             {
-              username?.length ? (
+              getUsername()?.length ? (
                 <p className='profile-user'>
-                  {username} | <Link to={ROUTES.LOGIN}><span onClick={handleLogout}>{LOGOUT}</span></Link>
+                  {getUsername()} | <Link to={ROUTES.LOGIN}><span onClick={handleLogout}>{LOGOUT}</span></Link>
                 </p>
               ) : (
                 <p className='profile-user'>
