@@ -30,15 +30,19 @@
             font-weight: 700;
             a {
                 @include flex-align(normal, center);
+                &:hover {
+                    color: $secondary-color;
+                }
             }
             .active {
                 color: $secondary-color
             }
+            
         }
     }
     .profile-user {
         @include flex-align(normal, center);
-        gap: 10px;
+        gap: 5px;
         font-weight: 500;
         font-size: 1.25rem;
         max-width: 200px;

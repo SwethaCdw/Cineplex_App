@@ -113,6 +113,7 @@ const ShortTeasers = ({ moviePageCounter, setMoviePageCounter, showImage, imageC
                             </div>
                             <video
                                 ref={el => videoRefs.current[index] = el}
+                                poster={teaser.poster}
                                 src={teaser.video_link}
                                 className="video-player"
                                 controls={showControls[index]}

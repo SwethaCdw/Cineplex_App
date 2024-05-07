@@ -14,7 +14,7 @@
   position: relative;
 }
 .short-teasers-section .videos-container .video-wrapper .video-player {
-  width: 100%;
+  width: 500px;
   margin-bottom: 25px;
 }
 .short-teasers-section .videos-container .video-wrapper .teaser-title {
