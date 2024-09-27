@@ -1,0 +1,35 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.lottery {
+    background-color: $lottery-background;
+    @include flex-align(center, center);
+    color: $text-color;
+    height: 80px;
+    font-weight: bold;
+    .input-section {
+        @include flex-align(center, center);
+        .lottery-caption {
+            font-size: 24px;
+        }
+        input {
+            width: 350px;
+            height: 45px;
+            margin: 0 20px;
+            padding: 10px;
+            border: none;
+        }
+        button {
+            height: 45px;
+            width: 250px;
+            font-size: 20px;
+            background-color: $lucky-button-color;
+            border: none;
+            color: $text-color;
+            padding: 0;
+        }
+    }
+   
+}

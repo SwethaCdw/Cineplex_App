@@ -1,0 +1,58 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.short-teasers-section {
+    padding: 0px 100px;
+    .short-teasers-heading {
+        font-size: 35px;
+        margin-bottom: 20px;
+    }
+    .videos-container {
+        display: flex;
+        position: relative;
+        gap: 30px;
+        .video-wrapper {
+            position: relative;
+            .video-player {
+                width: 500px;
+                margin-bottom: 25px;
+            }
+            .teaser-title {
+                font-size: 24px;
+            }
+            .play-icon {
+                height: 2em;
+                position: absolute;
+                top: 46%;
+                transform: translate(240%, -85%);
+                background-color: transparent;
+                color: white;
+                border: none;
+                padding: 20px 30px;
+                cursor: pointer;
+                z-index: 1;
+                svg {
+                    height: 3rem;
+                }
+            }
+            .notification {
+                height: 35px;
+                p {
+                    margin-top: 5px;
+                    font-size: 16px;
+                    color: $secondary-color;
+                }
+                .advertisement {
+                    width: 500px;
+                    height: 275px;
+                    object-fit: cover;
+                    position: absolute;
+                    top: 0%;
+                }
+            }
+        }
+       
+    }
+}

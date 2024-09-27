@@ -1,0 +1,25 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.other-languages {
+    padding: 70px 100px;
+    .language-list {
+        @include flex-align(normal, center);
+        list-style: none;
+        gap:5px;
+        margin-top: 15px;
+        .language {
+            @include flex-align(center, center);
+            color: $secondary-color;
+            font-size: 30px;
+            width: 50px;
+            border: 1px solid $secondary-color;
+            height: 50px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+    
+}

@@ -1,0 +1,6 @@
+.cover-picture {
+  width: 100%;
+  height: 1000px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=Home.css.map */

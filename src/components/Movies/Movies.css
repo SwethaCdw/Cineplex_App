@@ -1,0 +1,130 @@
+.movies-list-section {
+  display: flex;
+  gap: 150px;
+}
+.movies-list-section .all-movies {
+  flex: 40%;
+}
+.movies-list-section .all-movies .load-more-btn {
+  background-color: #d9bc2d;
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  margin-left: 35px;
+}
+.movies-list-section .all-movies .all-movies-title {
+  margin-left: 40px;
+  margin-top: 30px;
+  font-size: 35px;
+}
+.movies-list-section .all-movies .movie-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin: 20px 35px;
+  height: 75vh;
+  overflow: auto;
+}
+.movies-list-section .all-movies .movie-list .movie {
+  padding: 5px;
+}
+.movies-list-section .all-movies .movie-list .movie img {
+  width: 220px;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  cursor: pointer;
+}
+.movies-list-section .all-movies .movie-list .movie .movie-details-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.movies-list-section .all-movies .movie-list .movie .movie-details-container .movie-details {
+  width: 80%;
+}
+.movies-list-section .movies-description {
+  flex: 60%;
+  margin-top: 90px;
+}
+.movies-list-section .movies-description .selected-movie-details {
+  margin-right: 40px;
+}
+.movies-list-section .movies-description .selected-movie-details .selected-movie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.movies-list-section .movies-description .selected-movie-details .selected-movie-name {
+  font-size: 35px;
+}
+.movies-list-section .movies-description .selected-movie-details .selected-movie-likes {
+  margin: 18px 0;
+  color: #d9bc2d;
+  font-weight: 900;
+}
+.movies-list-section .movies-description .selected-movie-details .selected-movie-poster {
+  width: 200px;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.movies-list-section .movies-description .selected-movie-details .selected-movie-description {
+  line-height: 1.5;
+  margin-top: 20px;
+  font-size: 18px;
+}
+.movies-list-section .movies-description .selected-movie-details .actors-title {
+  margin: 25px 0;
+}
+.movies-list-section .movies-description .selected-movie-details .actors-list {
+  line-height: 1.5;
+  list-style: none;
+}
+.movies-list-section .movies-description .selected-movie-details .actors-list .actor {
+  font-size: 18px;
+}
+.movies-list-section .notification {
+  margin-right: 40px;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #488cd7;
+}
+.movies-list-section .notification .ad-notify-container {
+  width: 720px;
+}
+.movies-list-section .notification .ad-notify-container .advertisement {
+  width: 100%;
+  height: 700px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.movies-list-section .thumbs-up-button {
+  width: 40px;
+  height: 40px;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+.movies-list-section .thumbs-up-button:hover, .movies-list-section .thumbs-up-button.description {
+  border: 1px solid white;
+  border-radius: 50%;
+}
+.movies-list-section .thumbs-up-button svg {
+  transition: transform 0.3s ease;
+}
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.movies-list-section .thumbs-up-button.liked {
+  animation: bounce 0.5s ease;
+  color: green;
+}/*# sourceMappingURL=Movies.css.map */

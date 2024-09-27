@@ -1,0 +1,20 @@
+{
+    "teasers": [
+      {
+        "title": "Adventure Awaits",
+        "video_link": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "poster": "https://wallpapercave.com/wp/wp4752804.jpg"
+
+      },
+      {
+        "title": "Mystery Unveiled",
+        "video_link": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Elephants_Dream_s5_proog.jpg"
+      },
+      {
+        "title": "Love in Bloom",
+        "video_link": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+        "poster": "https://cdn.roosterteeth.com/image/upload/c_scale,dpr_auto,f_auto,w_auto/v1/2/uploads/images/5e13c250-802c-409b-accb-230ab5b4f381/original/24363-1502755846007-site_thumb.jpg"
+      }
+    ]
+  }

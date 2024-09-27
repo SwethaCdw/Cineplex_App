@@ -1,0 +1,39 @@
+.trailers {
+  padding: 70px 100px;
+}
+.trailers .title {
+  font-size: 35px;
+}
+.trailers .caption {
+  font-size: 20px;
+}
+.trailers .caption a {
+  -webkit-text-decoration: revert;
+          text-decoration: revert;
+  color: blue;
+}
+.trailers .trailer-section {
+  display: flex;
+  margin-top: 20px;
+}
+.trailers .trailer-section .trailer-image {
+  width: 365px;
+  height: 280px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.trailers .trailer-section .title {
+  margin-bottom: 20px;
+}
+.trailers .trailer-section .description {
+  margin: 20px 35px;
+}
+.trailers .trailer-section .description .description-caption {
+  font-size: 24px;
+  margin-bottom: 45px;
+  margin-right: 115px;
+}
+.trailers .trailer-section .description .watch-button {
+  padding: 12px 25px;
+  background-color: #d9bc2d;
+}/*# sourceMappingURL=Trailers.css.map */

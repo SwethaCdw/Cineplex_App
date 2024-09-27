@@ -1,0 +1,53 @@
+
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.header {
+    @include flex-align(space-between, center);
+    background-color: $primary-color;
+    height: 65px;
+    padding: 0 35px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    img {
+        width: 115px;
+    }
+    .app-logo {
+        cursor: pointer;
+        font-weight: 600;
+    }
+    .header-options {
+        @include flex-align(space-between, center);
+        width: 60%;
+        .menu-items {
+            list-style: none;
+            @include flex-align(space-between, normal);
+            width: auto;
+            gap: 50px;        
+            height: 100%;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            a {
+                @include flex-align(normal, center);
+                &:hover {
+                    color: $secondary-color;
+                }
+            }
+            .active {
+                color: $secondary-color
+            }
+            
+        }
+    }
+    .profile-user {
+        @include flex-align(normal, center);
+        gap: 5px;
+        font-weight: 500;
+        font-size: 1.25rem;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: white;
+    }
+}
